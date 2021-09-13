@@ -61,7 +61,7 @@ func init() {
 		FullTimestamp: true,
 	}
 
-	err := os.MkdirAll("logs", 0644)
+	err := os.MkdirAll("logs", 0755)
 
 	if err != nil || os.IsExist(err) {
 		panic("can't create log dir. no configured logging to files")
