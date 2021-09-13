@@ -20,7 +20,7 @@ func (app *App) Start(logger *logging.Logger) {
 	updateConfig.Timeout = 60
 
 	updates := app.bot.GetUpdatesChan(updateConfig)
-	logger.Infoln("open chan for reciving message")
+	logger.Infoln("open channel for reciving message")
 
 	for update := range updates {
 		if update.Message == nil {
