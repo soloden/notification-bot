@@ -27,13 +27,13 @@ func main() {
 	bot.Debug = true
 	logger.Infoln("telegram bot initialized")
 
-	mongoClient, err := mongo.NewClient(context.Background(), cfg.DbUsername, cfg.DbPassword, cfg.DbHost, cfg.DbPort, cfg.DbName)
+	mongoClient, err := mongo.NewClient(context.Background(), cfg.MongoDb.DbUsername, cfg.MongoDb.DbPassword, cfg.MongoDb.DbHost, cfg.MongoDb.DbPort, cfg.MongoDb.DbName)
 	if err != nil {
 		log.Fatal(err)
 	}
 	logger.Infoln("mongo client initialized")
 
-	ntfStorage := db.NewStorage(mongoClient, cfg.DbName, logger)
+	ntfStorage := db.NewStorage(mongoClient, cfg.MongoDb.DbName, logger)
 	logger.Infoln("notification storage initialized")
 
 	ntfService := notification.NewService(ntfStorage, *logger)
