@@ -8,12 +8,14 @@ import (
 )
 
 type Config struct {
-	BotToken   string `env:"BOT_TOKEN"`
-	DbUsername string `env:"DB_USERNAME"`
-	DbPassword string `env:"DB_PASSWORD"`
-	DbHost     string `env:"DB_HOST"`
-	DbPort     string `env:"DB_PORT"`
-	DbName     string `env:"DB_DATABASE"`
+	BotToken string `yaml:"bot_token"`
+	MongoDb  struct {
+		DbUsername string `yaml:"username"`
+		DbPassword string `yaml:"password"`
+		DbHost     string `yaml:"host"`
+		DbPort     string `yaml:"port"`
+		DbName     string `yaml:"database"`
+	}
 }
 
 var instance *Config
@@ -24,7 +26,7 @@ func LoadConfigs() *Config {
 		logger := logging.GetLogger()
 		logger.Info("read application config")
 		instance = &Config{}
-		if err := cleanenv.ReadEnv(instance); err != nil {
+		if err := cleanenv.ReadConfig("config.yml", instance); err != nil {
 			help, _ := cleanenv.GetDescription(instance, nil)
 			logger.Info(help)
 			logger.Fatal(err)
