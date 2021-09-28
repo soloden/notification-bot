@@ -25,7 +25,8 @@ func (s *Service) Create(ctx context.Context, dto NotificationDto) (string, erro
 
 	ntfId, err := s.storage.Create(ctx, nNtf)
 	if err != nil {
-		return ntfId, fmt.Errorf("failed to create new notification due err - %s", err)
+		s.logger.Error(fmt.Errorf("failed to create new notification due err - %s", err))
+		return ntfId, fmt.Errorf("ошибка при создании уведомления")
 	}
 
 	return ntfId, nil
