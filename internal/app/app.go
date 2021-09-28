@@ -8,10 +8,10 @@ import (
 
 type App struct {
 	bot     *tgbotapi.BotAPI
-	service *notification.Service
+	service notification.Service
 }
 
-func NewApp(bot *tgbotapi.BotAPI, service *notification.Service) *App {
+func NewApp(bot *tgbotapi.BotAPI, service notification.Service) *App {
 	return &App{bot: bot, service: service}
 }
 

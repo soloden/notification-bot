@@ -7,19 +7,27 @@ import (
 	"github.com/soloden/notificator-bot/pkg/logging"
 )
 
-type Service struct {
+type service struct {
 	storage Storage
 	logger  logging.Logger
 }
 
-func NewService(storage Storage, logger logging.Logger) *Service {
-	return &Service{
+func NewService(storage Storage, logger logging.Logger) *service {
+	return &service{
 		storage: storage,
 		logger:  logger,
 	}
 }
 
-func (s *Service) Create(ctx context.Context, dto NotificationDto) (string, error) {
+type Service interface {
+	Create(context.Context, NotificationDto) (string, error)
+	GetOne(context.Context, int) (Notification, error)
+	GetMany(context.Context, []int) ([]Notification, error)
+	Update(context.Context, NotificationDto) error
+	Delete(context.Context, int) error
+}
+
+func (s *service) Create(ctx context.Context, dto NotificationDto) (string, error) {
 
 	nNtf := NewNotification(dto)
 
@@ -32,18 +40,18 @@ func (s *Service) Create(ctx context.Context, dto NotificationDto) (string, erro
 	return ntfId, nil
 }
 
-func (s *Service) GetOne(ctx context.Context, id int) (ntf Notification, err error) {
+func (s *service) GetOne(ctx context.Context, id int) (ntf Notification, err error) {
 	return
 }
 
-func (s *Service) CreateMany(ctx context.Context, ids []int) (ntfList []Notification, err error) {
+func (s *service) GetMany(ctx context.Context, ids []int) (ntfList []Notification, err error) {
 	return
 }
 
-func (s *Service) Update(ctx context.Context, dto NotificationDto) error {
+func (s *service) Update(ctx context.Context, dto NotificationDto) error {
 	return nil
 }
 
-func (s *Service) Delete(ctx context.Context, id int) error {
+func (s *service) Delete(ctx context.Context, id int) error {
 	return nil
 }
