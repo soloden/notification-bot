@@ -1,0 +1,10 @@
+bot_token: string
+
+mongodb:
+  host: string
+  port: int
+  username: string
+  password: string
+  auth_db: string
+  database: string
+  collection: string
