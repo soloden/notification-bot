@@ -1,4 +1,4 @@
-NOTIFICATION BOT
+#NOTIFICATION BOT
 
 Pet project бота для телеграмм, для работы с уведомлениями
 
